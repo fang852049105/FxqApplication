@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_notification_content"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:background="@color/a2">
+
+    <ImageView
+        android:id="@+id/iv_icon"
+        android:layout_width="49dp"
+        android:layout_height="49dp"
+        android:src="@drawable/ic_launcher"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp"/>
+
+    <LinearLayout
+        android:id="@+id/ll_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="9dp"
+        android:layout_toRightOf="@+id/iv_icon"
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="优惠速递的标题"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:layout_marginRight="110dp"
+            android:textStyle="bold"
+            android:maxLines="2"
+            android:ellipsize="end"/>
+
+        <TextView
+            android:id="@+id/tv_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:textSize="12sp"
+            android:layout_marginTop="4dp"
+            android:lineSpacingExtra="3dp"
+            android:layout_marginRight="50dp"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:text="优惠速递的内容，优惠速递的内容优惠速递的内容优惠速递的内容优惠速递的内容优惠速递的内容优惠速递的内容优"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">FXQ_demo</string>
+    <string name="one_month">一个月</string>
+    <string name="six_month">六个月</string>
+    <string name="one_year">一年</string>
+    <string name="three_year">三年</string>
+    <string name="section_list">一个月,六个月,一年,三年</string>
+    <string name="section_list_two">一个月,三年</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="test_link_text"><Data><![CDATA[如有疑问可点击<a href=\'\'>“在线客服”</a>咨询。]]></Data></string>
+</resources>

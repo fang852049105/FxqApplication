@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--<ScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:focusableInTouchMode="true"
+            android:focusable="true">
+
+            <com.example.fangxq.myapplication.customview.ClearShownEditText
+                android:id="@+id/test_edit_two"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="63dp"
+                android:layout_marginRight="63dp"
+                android:hint="测试"
+                android:textColor="@color/b1"
+                android:textColorHint="@color/b2"
+                app:shown_edit_hint_text_size="14sp"
+                app:shown_edit_text_size="14sp" />
+
+            <com.example.fangxq.myapplication.customview.ClearShownEditText
+                android:id="@+id/test_edit_two"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="63dp"
+                android:layout_marginRight="63dp"
+                android:layout_marginTop="10dp"
+                android:hint="ceshi"
+                android:textColor="@color/b1"
+                android:textColorHint="@color/b2"
+                app:shown_edit_hint_text_size="14sp"
+                app:shown_edit_text_size="26sp"
+                app:show_eye="false"
+                app:show_clear="false"/>
+
+
+            <com.example.fangxq.myapplication.customview.NumberClearEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="63dp"
+                android:layout_marginRight="63dp"
+                android:hint="ewqdsas"
+                android:inputType="phone"
+                android:textColor="@color/b1"
+                android:textColorHint="@color/b2"
+                app:edit_hint_text_size="14sp"
+                app:edit_text_size="26sp" />
+
+            <com.example.fangxq.myapplication.customview.TitleNumberClearEditText
+                android:id="@+id/mTitleNumberClearEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp" />
+
+            <com.example.fangxq.myapplication.customview.TitleClearShownEditText
+                android:id="@+id/mTitleClearShownEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp" />
+
+            <com.example.fangxq.myapplication.customview.CjjShadowButton
+                android:id="@+id/mCjjShadowButtonView"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:clickable="true"/>
+
+            <com.example.fangxq.myapplication.customview.CustomEditText
+                android:id="@+id/CustomEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+    <!--</ScrollView>-->
+
+</ScrollView>

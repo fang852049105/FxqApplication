@@ -1,0 +1,81 @@
+<resources>
+
+    <style name="AppBaseTheme" parent="android:Theme.Light"></style>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Base.Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!--<style name="AppCompatTheme" parent="Theme.AppCompat.Light.NoActionBar">-->
+        <!--<item name="android:windowContentOverlay">@null</item>-->
+    <!--</style>-->
+
+    <!--<style name="AppTheme" parent="AppBaseTheme">-->
+        <!--<item name="android:windowTitleSize">48dp</item>-->
+        <!--<item name="android:windowBackground">@color/b4</item>-->
+    <!--</style>-->
+
+
+
+    <style name="ButtonStyle">
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:background">@drawable/shadow_button_bg_selector</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:minHeight">36dp</item>
+
+    </style>
+
+    <style name="FXQAppTheme" parent="AppBaseTheme">
+        <item name="android:windowTitleSize">48dp</item>
+        <item name="android:windowBackground">@color/a1</item>
+    </style>
+
+    <style name="DetailTabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">@color/a1</item>
+        <item name="tabIndicatorHeight">0dp</item>
+        <item name="tabPaddingStart">8dp</item>
+        <item name="tabPaddingEnd">8dp</item>
+        <item name="tabBackground">@android:color/white</item>
+        <item name="tabTextAppearance">@style/DetailTabTextAppearance</item>
+        <item name="tabSelectedTextColor">@color/a1</item>
+    </style>
+
+    <style name="DetailTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/b1</item>
+        <item name="textAllCaps">true</item>
+    </style>
+
+    <style name="DownloadProgressStyle">
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:progressDrawable">@drawable/horizontal_progress</item>
+        <item name="android:minHeight">20dp</item>
+    </style>
+
+    <style name="PushInOutStyle">
+        <item name="android:windowEnterAnimation">@anim/push_up_in</item>
+        <!-- 指定显示的动画xml -->
+
+        <item name="android:windowExitAnimation">@anim/push_down_out</item>
+        <!-- 指定消失的动画xml -->
+    </style>
+
+    <style name="PopupWindowZoomStyle">
+        <item name="android:windowEnterAnimation">@anim/push_up_enlarge</item>
+        <item name="android:windowExitAnimation">@anim/push_down_shrink</item>
+    </style>
+
+
+    <style name="FilterPushInOutStyle">
+        <item name="android:windowEnterAnimation">@anim/filter_push_up_in</item>
+        <!-- 指定显示的动画xml -->
+
+        <item name="android:windowExitAnimation">@anim/filter_push_down_out</item>
+        <!-- 指定消失的动画xml -->
+    </style>
+
+</resources>

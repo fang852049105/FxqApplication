@@ -1,0 +1,106 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffff"
+    android:orientation="vertical">
+
+    <com.fxq.lib.customview.CustomInterceptScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:orientation="vertical">
+
+            <com.example.fangxq.myapplication.customview.BubbleSeekBar
+                android:id="@+id/bubble_seek_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                app:bsb_auto_adjust_section_mark="true"
+                app:bsb_second_track_color="@color/a1"
+                app:bsb_show_progress_in_float="true"
+                app:bsb_show_section_mark="true"
+                app:bsb_show_text="true"
+                app:bsb_show_thumb_text="false"
+                app:bsb_text_position="bottom"
+                app:bsb_thumb_text_color="@color/colorPrimary"
+                app:bsb_thumb_text_size="18sp" />
+
+
+            <TextView
+                android:id="@+id/custom_seek_bar_text3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:gravity="center_horizontal"
+                android:paddingTop="10dp"
+                android:textSize="25sp"
+                android:textColor="@color/b1" />
+
+            <com.fxq.lib.customview.CustomRangeSeekBar
+                android:id="@+id/seekbar2"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                app:markTextArray="@array/markArray"
+                app:lineColorSelected="@color/a1"
+                app:lineColorEdge="@color/b3"
+                app:textPadding="30dp"
+                app:thumbPrimaryColor="@color/a1"
+                app:thumbSecondaryColor="@color/a1"
+                app:seekBarHeight="4dp"
+                app:thumbSize="15dp"
+                app:cellMode="other"
+                app:seekBarMode="single"
+                android:visibility="gone"/>
+
+            <com.fxq.lib.customview.CustomRangeSeekBar
+                android:id="@+id/custom_seek_bar4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="12dp"
+                android:paddingRight="10dp"
+                app:csb_auto_adjust_section_mark="true"
+                app:csb_second_track_color="@color/a1"
+                app:csb_show_all_section_value="true"
+                app:csb_show_section_mark="false"
+                app:csb_show_thumb_text="false"
+                app:csb_thumb_text_size="18sp" />
+
+            <com.fxq.lib.customview.CustomRangeSeekBar
+                android:id="@+id/custom_seek_bar6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="12dp"
+                android:paddingRight="10dp"
+                app:csb_auto_adjust_section_mark="true"
+                app:csb_second_track_color="@color/a1"
+                app:csb_show_section_mark="false"
+                app:csb_show_thumb_text="false"
+                app:csb_thumb_text_size="18sp" />
+
+            <com.fxq.lib.customview.CustomRangeSeekBar
+                android:id="@+id/custom_seek_bar7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="15dp"
+                app:csb_second_track_color="@color/a1"
+                app:csb_auto_adjust_section_mark="true"
+                app:csb_show_all_section_value="false"
+                app:csb_show_section_mark="false"
+                app:csb_show_thumb_text="false"
+                app:csb_thumb_text_size="18sp" />
+
+
+        </LinearLayout>
+    </com.fxq.lib.customview.CustomInterceptScrollView>
+
+
+</LinearLayout>
+

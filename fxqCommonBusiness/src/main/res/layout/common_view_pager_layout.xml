@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <!-- ViewPager-->
+
+    <fxq.android.com.commonbusiness.customview.AutoScrollViewPager
+        android:id="@+id/common_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- 指示器 indicatorView-->
+    <!--<CirclePageIndicator-->
+    <!--android:id="@+id/common_view_pager_indicator_view"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:paddingLeft="2dp"-->
+    <!--android:paddingRight="2dp"-->
+    <!--android:paddingTop="3dp"/>-->
+    <RelativeLayout
+        android:id="@+id/titleMask"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_alignParentBottom="true">
+
+
+        <fxq.android.com.commonbusiness.customview.CirclePageIndicator
+            android:id="@+id/common_view_pager_indicator_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:paddingTop="3dp" />
+    </RelativeLayout>
+</RelativeLayout>
+

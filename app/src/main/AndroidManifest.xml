@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.fangxq.myapplication">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+
+
+    <application
+        android:name="com.example.fangxq.myapplication.FxqApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        
+        <service android:name=".service.NotificationPopupService" />
+
+        <service
+            android:name="com.example.fangxq.myapplication.service.DeveloperOptionsService"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService"/>
+            </intent-filter>
+            <meta-data android:name="android.accessibilityservice"
+                android:resource="@xml/accessible_service_config"/>
+        </service>
+        <activity
+            android:name=".ui.MainActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.CanvasDrawActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".ui.CoordinatorTestActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".ui.CustomSeekbarActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".ui.LineChartTestActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".ui.PieChartActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".ui.CustomPagerViewActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".ui.EditTestActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".ui.UITestActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".ui.FragmentTestActivity"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <meta-data
+            android:name="com.taobao.android.hotfix.IDSECRET"
+            android:value="24909447-1" />
+        <meta-data
+            android:name="com.taobao.android.hotfix.APPSECRET"
+            android:value="e2b751d7d056e8093b8df29e2c5ff42c" />
+        <meta-data
+            android:name="com.taobao.android.hotfix.RSASECRET"
+            android:value="MIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDIJNQ08f2xR+/LhdHz5cDysRgTYkI3YJ6QIpcDIG3cd54sfsg8QsvrkhSwfFRGbvXxg5bjmABB3+yLPHj4m20bSh2Cb/CxpbUGsdIhW//UfQqQ6DBYSxBJI9A7YKViiRSGky49QtHCBxWSsg9Ru/vXCTkMATuOcyaREKPt1AYON4pwg7nYhze+jpEGcOdGoGKNkCV8uZ8GCW+Rq55nh7wYuRvq63xELaKoTYxWIUNWormIwpL11mhNZuS9+wt34EbJ7dCveRwvXvLDJAqO/VBM9PpEbA/t4/kp46V9qvQpNK9epyLd/aLGni0ryPG0/ZkcUgBH8FQV+JP2IagFL5oRAgMBAAECggEBALwRl3KU/m3rChK2Ed7cw12KOfRk/ZHp8bXBOyQOAg4MPQ7Up7WwkswuvdBFVC/HLsaef1goSf2cvDruPUJnUrQ1Bdu+8m8MJjo/OBRuzcxPH3GhLWSaTJhd1dsl6uLXqvj2LpoUQuTPIV9ygGCug2zCVt/H/L3TyKbB+ziNZo9NyFC8EBTfMu6BQlsKOKm4JJ9Rq1wSC30p2xeEsOL/xTPc+Wt1zViWikAdkq0OTB05ktzqG11djgxQsmMYBIGt62dP2JH7lwLXsPgPPtFUyK7qZTJPKxcMfZgIy1mRA7dlLy7TWPuteZzaSXr2Upj95A6qVfBPuLdPMuUkYoRhYsECgYEA+BU0mMfX9xiCBCaI29oCq07GTnnxZyFgXDBrJBKddYhL7u7VXbB+v5adltarmTzwBGL49JcIYHZDb/oMbiXqh6VYXdd5LBZpIaa86z+DUWadOqAPp4AG4vw6tRS0tbHPBCnbtD1shff7lSFOzlkXPUF9MdTriYXWQeq57d/klLkCgYEAzof4Yb+MGQEvpOnMM8wXK1CapZspywZfSb1DfF/DHJ4TyWkWAPxdb4GT4R4h0TYapg5CViURlYxxTRmn5+CGvw8Nvn5OzvoZlqoo1I6aJEOZsuTOJ232AmBdg1duKvoKESs7OyathBtnF/AjpCqM14okduAbnxBrTt8Qx+ojtBkCgYB/CZzdf7i/9/TcWz9KFeG4B6bVGOzdeuH1U3YKCt5HCXyY5gSs7Wx6f45DZ7qHxgTCukvyNEU94FG4Tbt/zDrFK46Mv4J1aSR87v1fGi8MyBdLphteEtlz8uW9RNUlFeCEqUqwiaPBFrPmMiBA2q5j191cX0QeMEL/jkuX3EcZQQKBgQCcDkGwGnxRqIPHqKGTwfL/17gCymuZ7QazQT9tCy7ywL9SwQTPWeGAD/kdcRc8bhVUxBF75iaTSbuS9n/Yxd8LHuTTu7zwyCntnkWb1uTB4hKRCjJ7uKrawNXoGHg2IRjaQEBRQbh6yfnsLJfBxCUH+Gn1KQG1/0IWJpcXd+PigQKBgQDSqPH6Lk7lj+GA4HU0mB+Hwbv9+fjayMiLhBrIuAV3Yz5LLQ/vYo+vhxDODH0Qj82AJHWr0/PQDfvSXgp4YpC80jwXJI9hzp5s9yZShyn6DKA3w7xZbSG3IvIC/zu7laIn1WSNi81C6Cb0kw8xuFTqv/VYwR6f7YNNLH34ynIFKA==" />
+
+    </application>
+
+</manifest>

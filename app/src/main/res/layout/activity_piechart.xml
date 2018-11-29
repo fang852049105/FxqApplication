@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/chart1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <com.fxq.lib.customview.RoundProgressBar
+        android:id="@+id/assets_progress"
+        android:layout_width="67dp"
+        android:layout_height="67dp"
+        android:layout_below="@id/chart1"
+        android:layout_centerInParent="true"
+        app:displayGap="true"
+        app:roundColor="@color/a1"
+        app:roundProgressColor="@color/a2"
+        app:roundWidth="5dp"
+        app:displayOneByOne="true"
+        app:variousDisplay="true"
+        app:variousInverse="true"
+        app:variousRoundWidthDv="3dp" />
+
+    <com.fxq.lib.customview.RoundProgressBar
+        android:id="@+id/progress"
+        android:layout_width="67dp"
+        android:layout_height="67dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/assets_progress"
+        android:layout_centerInParent="true"
+        app:displayGap="true"
+        app:roundColor="@color/a1"
+        app:roundProgressColor="@color/a2"
+        app:roundWidth="5dp"
+        app:variousDisplay="true"
+        app:variousInverse="true"
+        app:variousRoundWidthDv="3dp" />
+
+</RelativeLayout>
