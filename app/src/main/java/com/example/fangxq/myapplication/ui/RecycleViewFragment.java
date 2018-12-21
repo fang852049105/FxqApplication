@@ -17,7 +17,10 @@ import android.widget.RelativeLayout;
 import com.example.fangxq.myapplication.R;
 import com.example.fangxq.myapplication.adapter.RecycleViewAdapter;
 import com.example.fangxq.myapplication.manager.CustomLinearLayoutManager;
+import com.fxq.apt.annotation.BindView;
 import com.fxq.lib.utils.Utils;
+
+import fxq.android.com.commonbusiness.utils.BindViewUtils;
 
 /**
  * @author huiguo
@@ -40,7 +43,7 @@ public class RecycleViewFragment extends Fragment {
 
     private void initView() {
         mContentLayout = (RelativeLayout) mContentView.findViewById(R.id.rl_content);
-        mRecyclerView = (RecyclerView) mContentView.findViewById(R.id.recycler_view);
+        //mRecyclerView = (RecyclerView) mContentView.findViewById(R.id.recycler_view);
         manager = new CustomLinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(manager);
         RecycleViewAdapter recycleViewAdapter  = new RecycleViewAdapter(getActivity(), R.layout.layout_recyclew_item_view, 20);

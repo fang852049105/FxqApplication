@@ -1,1 +1,1 @@
-include ':app', ':fxqCommonBusiness', ':fxqlib'
+include ':app', ':fxqCommonBusiness', ':fxqlib', ':fxqJavaApt', ':fxqRouter', ':fxqDesignMethod'

@@ -13,25 +13,32 @@ import android.widget.TextView;
 
 
 import com.example.fangxq.myapplication.R;
+import com.fxq.apt.annotation.BindView;
+import com.fxq.apt.annotation.Module;
+import com.fxq.apt.annotation.Router;
 import com.taobao.sophix.SophixManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import fxq.android.com.commonbusiness.ui.BaseSwipeFinishActivity;
+import fxq.android.com.commonbusiness.utils.BindViewUtils;
 
+@Module("mainModule")
+@Router("main")
 public class MainActivity extends BaseSwipeFinishActivity implements AdapterView.OnItemClickListener {
 
-
-    private ListView listView;
+    @BindView(R.id.listView)
+    ListView listView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        BindViewUtils.bind(this);
         addSwipeFinishLayout();
         //首页activtiy可设置为不能滑动关闭
         setEnableGesture(false);
-        listView = (ListView) findViewById(R.id.listView);
+        //listView = (ListView) findViewById(R.id.listView);
         ArrayList<ContentItem> objects = new ArrayList<ContentItem>();
         objects.add(new ContentItem("Line Chart (Dual YAxis) test", ""));
         objects.add(new ContentItem("CustomRangeSeekBar", ""));

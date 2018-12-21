@@ -11,6 +11,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.HandlerThread;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
@@ -33,6 +34,7 @@ import com.example.fangxq.myapplication.customview.HorizontalProgressWithText;
 import com.example.fangxq.myapplication.customview.TestPopupViewManager;
 import com.example.fangxq.myapplication.service.NotificationPopupService;
 import com.example.fangxq.myapplication.utils.TestUtils;
+import com.fxq.apt.annotation.Router;
 import com.fxq.lib.customview.AutoVerticalScrollTextview;
 
 import org.apache.commons.lang3.StringUtils;
@@ -47,6 +49,7 @@ import fxq.android.com.commonbusiness.ui.BaseSwipeFinishActivity;
 /**
  * Created by Fangxq on 2017/7/21.
  */
+@Router("uiTest")
 public class UITestActivity extends BaseSwipeFinishActivity {
 
     private Button addButton;
@@ -67,6 +70,8 @@ public class UITestActivity extends BaseSwipeFinishActivity {
     private HorizontalProgressWithText mHorizontalProgressWithText;
     private WebView infoWebView;
     private LinearLayout mLinearLayout;
+
+    private HandlerThread
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -281,4 +286,5 @@ public class UITestActivity extends BaseSwipeFinishActivity {
     private void inflateTestLinearLayout() {
 
     }
+
 }
