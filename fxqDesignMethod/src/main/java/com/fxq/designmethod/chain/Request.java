@@ -17,7 +17,7 @@ public class Request {
 
     private String managerInfo;
 
-    private String departmentHeaderInfo;
+    private String departmentLeaderInfo;
 
     private String customInfo;
 
@@ -28,7 +28,7 @@ public class Request {
         this.days = builder.days;
         this.groupLeaderInfo = builder.groupLeaderInfo;
         this.managerInfo = builder.managerInfo;
-        this.departmentHeaderInfo = builder.departmentHeaderInfo;
+        this.departmentLeaderInfo = builder.departmentLeaderInfo;
         this.customInfo = builder.customInfo;
     }
 
@@ -43,7 +43,7 @@ public class Request {
 
         public String managerInfo;
 
-        public String departmentHeaderInfo;
+        public String departmentLeaderInfo;
 
         public String customInfo;
 
@@ -76,8 +76,8 @@ public class Request {
             return this;
         }
 
-        public Builder setDepartmentHeaderInfo(String departmentHeaderInfo) {
-            this.departmentHeaderInfo = departmentHeaderInfo;
+        public Builder setdepartmentLeaderInfo(String departmentLeaderInfo) {
+            this.departmentLeaderInfo = departmentLeaderInfo;
             return this;
         }
 
@@ -99,9 +99,9 @@ public class Request {
                 this.managerInfo = request.managerInfo;
             }
 
-            if (request.departmentHeaderInfo != null
-                    && !request.departmentHeaderInfo.equals("")) {
-                this.departmentHeaderInfo = request.departmentHeaderInfo;
+            if (request.departmentLeaderInfo != null
+                    && !request.departmentLeaderInfo.equals("")) {
+                this.departmentLeaderInfo = request.departmentLeaderInfo;
             }
 
             if (request.customInfo != null && !request.customInfo.equals("")) {
@@ -137,8 +137,8 @@ public class Request {
         return managerInfo;
     }
 
-    public String departmentHeaderInfo() {
-        return departmentHeaderInfo;
+    public String departmentLeaderInfo() {
+        return departmentLeaderInfo;
     }
 
     public String customInfo() {
@@ -150,7 +150,7 @@ public class Request {
         return "Request [name=" + name + ", reason=" + reason + ", days="
                 + days + ",customInfo=" + customInfo + ", groupLeaderInfo="
                 + groupLeaderInfo + ", managerInfo=" + managerInfo
-                + ", departmentHeaderInfo=" + departmentHeaderInfo + "]";
+                + ", departmentLeaderInfo=" + departmentLeaderInfo + "]";
     }
 
 }

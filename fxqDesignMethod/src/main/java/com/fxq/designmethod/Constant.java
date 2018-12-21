@@ -6,5 +6,5 @@ package com.fxq.designmethod;
  */
 public class Constant {
 
-    public static final String LOG_TAG = "FXQ";
+    public static final String LOG_TAG_CHAIN = "FXQ_CHAIN";
 }

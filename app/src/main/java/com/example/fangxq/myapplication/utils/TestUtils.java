@@ -6,6 +6,12 @@ import android.content.Intent;
 import android.provider.Settings;
 import android.widget.Toast;
 
+import com.fxq.designmethod.Constant;
+import com.fxq.designmethod.chain.ChainOfResponsibilityClient;
+import com.fxq.designmethod.chain.Request;
+import com.fxq.designmethod.chain.Result;
+import com.fxq.lib.log.Logger;
+
 /**
  * @author huiguo
  * @date 2018/9/26
@@ -43,5 +49,13 @@ public class TestUtils {
 
             }
         }
+    }
+
+    public static void ChainTest() {
+        Request request = new Request.Builder().setName("张三").setDays(5)
+                .setReason("事假").build();
+        ChainOfResponsibilityClient client = new ChainOfResponsibilityClient();
+        Result result = client.execute(request);
+        Logger.d(Constant.LOG_TAG_CHAIN, result.toString());
     }
 }

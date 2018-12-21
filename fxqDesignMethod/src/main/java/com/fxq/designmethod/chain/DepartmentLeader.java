@@ -12,10 +12,10 @@ public class DepartmentLeader implements Ratify {
     @Override
     public Result deal(Chain chain) {
         Request request = chain.request();
-        Logger.d(Constant.LOG_TAG, "DepartmentHeader=====>request:" + request.toString());
+        Logger.d(Constant.LOG_TAG_CHAIN, "DepartmentLeader=====>request:" + request.toString());
         if (request.days() > 7) {
             return new Result(false, "你这个完全没必要");
         }
-        return new Result(true, "DepartmentHeader：不要着急，把事情处理完再回来！");
+        return new Result(true, "DepartmentLeader：不要着急，把事情处理完再回来！");
     }
 }

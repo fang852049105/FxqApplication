@@ -7,11 +7,11 @@ import java.util.ArrayList;
  * @author huiguo
  * @date 2018/12/21
  */
-public class ChainOfResponsibilityManager {
+public class ChainOfResponsibilityClient {
 
     private ArrayList<Ratify> ratifies;
 
-    public ChainOfResponsibilityManager() {
+    public ChainOfResponsibilityClient() {
         ratifies = new ArrayList<Ratify>();
     }
 

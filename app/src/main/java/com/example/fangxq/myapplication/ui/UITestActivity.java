@@ -71,8 +71,6 @@ public class UITestActivity extends BaseSwipeFinishActivity {
     private WebView infoWebView;
     private LinearLayout mLinearLayout;
 
-    private HandlerThread
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -131,29 +129,6 @@ public class UITestActivity extends BaseSwipeFinishActivity {
 
     }
 
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    private void showHangNotification() {
-        Notification.Builder builder = new Notification.Builder(this);
-        Intent mIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://blog.csdn.net/itachi85/"));
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, mIntent, 0);
-        builder.setContentIntent(pendingIntent);
-        builder.setSmallIcon(R.drawable.ic_biyan);
-        builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_avatar));
-        builder.setAutoCancel(true);
-        builder.setContentTitle("悬挂式通知");
-        //设置点击跳转
-        Intent hangIntent = new Intent();
-        hangIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        hangIntent.setClass(this, CustomPagerViewActivity.class);
-        //如果描述的PendingIntent已经存在，则在产生新的Intent之前会先取消掉当前的
-        PendingIntent hangPendingIntent = PendingIntent.getActivity(this, 0, hangIntent, PendingIntent.FLAG_CANCEL_CURRENT);
-        builder.setFullScreenIntent(hangPendingIntent, true);
-        NotificationManager notificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
-        if (notificationManager != null) {
-            notificationManager.notify(2, builder.build());
-        }
-    }
-
 
     private void setTestText() {
         TextView testTextView = (TextView) findViewById(R.id.text);
@@ -164,30 +139,24 @@ public class UITestActivity extends BaseSwipeFinishActivity {
         @Override
         public void onClick(View v) {
 
-//            stubView.setVisibility(View.VISIBLE);
+            stubView.setVisibility(View.VISIBLE);
 //            String url = "dmlife://test?p_t=p_t";
 //            String realUrl = appendCommonParams(url);
 //            Log.e("fxq", "realUrl = " + realUrl);
             //ProtocolPopupView.initProtocolPopupView(UITestActivity.this, UITestActivity.this).show(v);
             //showHangNotification();
             //TestPopupViewManager.getInstance().showPopupWindow(TestPopupViewManager.getInstance().buildTestMessageNotificationItem());
-            startService(new Intent(UITestActivity.this, NotificationPopupService.class));
+            //startService(new Intent(UITestActivity.this, NotificationPopupService.class));
             //getPermission();
             //SortManager.selectSort();
             //SortManager.insertSort();
             //testPatch();
 //            test();
+            TestUtils.ChainTest();
             String idString = v.getContext().getResources().getResourceEntryName(v.getId());
             String tag = (String) v.getTag();
            Log.e("fxq", "idString = " + idString + "----- tag = " + tag);
-//            DeveloperOptionsManager.getInstance().setFromTestHelper(true);
-//            if (!SystemSettingUtil.checkAccessibilityEnabled("service.DeveloperOptionsService", UITestActivity.this)) {
-//                Intent intent = new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
-//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                startActivity(intent);
-//            } else {
-//                SystemSettingUtil.startDevelopmentActivity(UITestActivity.this);
-//            }
+
 
         }
     };
@@ -195,9 +164,7 @@ public class UITestActivity extends BaseSwipeFinishActivity {
     private View.OnClickListener deleteOnClicked = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            //findViewById(R.id.view_stub_import).setVisibility(View.GONE);
             stubView.setVisibility(View.GONE);
-            //int i = Integer.parseInt("1.2");
         }
     };
 
@@ -225,11 +192,6 @@ public class UITestActivity extends BaseSwipeFinishActivity {
         img_title.setImageResource(images[position]);
         return view;
     }
-
-//    private void ndkTest() {
-//        String testNdkStr = NdkTools.getStringFromNDK();
-//        Log.e("fxq", "testNdkStr = " + testNdkStr);
-//    }
 
     private void initRecyclerViewDate(){
         List<Integer> datas = new ArrayList<>();
@@ -283,8 +245,6 @@ public class UITestActivity extends BaseSwipeFinishActivity {
         Log.e("fxq", "patch success  =" + i);
     }
 
-    private void inflateTestLinearLayout() {
 
-    }
 
 }

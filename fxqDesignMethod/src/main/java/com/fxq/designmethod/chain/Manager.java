@@ -11,7 +11,7 @@ public class Manager implements Ratify {
     @Override
     public Result deal(Chain chain) {
         Request request = chain.request();
-        Logger.d(Constant.LOG_TAG, "Manager=====>request:" + request.toString());
+        Logger.d(Constant.LOG_TAG_CHAIN, "Manager=====>request:" + request.toString());
         if (request.days() > 3) {
             // 构建新的Request
             Request newRequest = new Request.Builder().newRequest(request)
