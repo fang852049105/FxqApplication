@@ -1,6 +1,7 @@
 package com.example.fangxq.myapplication.service;
 
 import android.accessibilityservice.AccessibilityService;
+import android.util.Log;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 
@@ -19,13 +20,14 @@ public class DeveloperOptionsService extends AccessibilityService {
     @Override
     protected void onServiceConnected() {
         super.onServiceConnected();
+        Log.e("fxq", "onServiceConnected");
         SystemSettingUtil.startDevelopmentActivity(this);
-
     }
 
     @Override
     public void onAccessibilityEvent(AccessibilityEvent event) {
-        AccessibilityNodeInfo nodeInfo = findViewByText("调试 GPU 过度绘制");
+        Log.e("fxq", "onAccessibilityEvent");
+        AccessibilityNodeInfo nodeInfo = findViewByText(DeveloperOptionsManager.getInstance().getTargetTitle());
         if (nodeInfo != null && DeveloperOptionsManager.getInstance().isFromTestHelper()) {
             performViewClick(nodeInfo);
             DeveloperOptionsManager.getInstance().setFromTestHelper(false);
@@ -35,7 +37,7 @@ public class DeveloperOptionsService extends AccessibilityService {
 
     @Override
     public void onInterrupt() {
-
+        Log.e("fxq", "onInterrupt");
     }
 
     public static void performViewClick(AccessibilityNodeInfo nodeInfo) {

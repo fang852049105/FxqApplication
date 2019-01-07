@@ -78,4 +78,13 @@
         <!-- 指定消失的动画xml -->
     </style>
 
+
+    <style name="AppTheme_NoTitle_FullScreen" parent="AppTheme">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+
+    </style>
+
 </resources>

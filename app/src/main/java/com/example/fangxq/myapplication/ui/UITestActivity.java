@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.HandlerThread;
+import android.provider.Settings;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
@@ -32,7 +33,9 @@ import com.example.fangxq.myapplication.R;
 import com.example.fangxq.myapplication.adapter.MyRecyclerViewAdapter;
 import com.example.fangxq.myapplication.customview.HorizontalProgressWithText;
 import com.example.fangxq.myapplication.customview.TestPopupViewManager;
+import com.example.fangxq.myapplication.manager.DeveloperOptionsManager;
 import com.example.fangxq.myapplication.service.NotificationPopupService;
+import com.example.fangxq.myapplication.utils.SystemSettingUtil;
 import com.example.fangxq.myapplication.utils.TestUtils;
 import com.fxq.apt.annotation.Router;
 import com.fxq.lib.customview.AutoVerticalScrollTextview;
@@ -151,12 +154,13 @@ public class UITestActivity extends BaseSwipeFinishActivity {
             //SortManager.selectSort();
             //SortManager.insertSort();
             //testPatch();
-//            test();
+            //test();
             TestUtils.ChainTest();
             String idString = v.getContext().getResources().getResourceEntryName(v.getId());
             String tag = (String) v.getTag();
-           Log.e("fxq", "idString = " + idString + "----- tag = " + tag);
-
+            Log.e("fxq", "idString = " + idString + "----- tag = " + tag);
+            Log.e("fxq", "num = " + 101 * 0.01);
+            autoClickDevelopmentOption("调试 GPU 过度绘制");
 
         }
     };
@@ -165,6 +169,7 @@ public class UITestActivity extends BaseSwipeFinishActivity {
         @Override
         public void onClick(View v) {
             stubView.setVisibility(View.GONE);
+            autoClickDevelopmentOption("GPU 呈现模式分析");
         }
     };
 
@@ -245,6 +250,22 @@ public class UITestActivity extends BaseSwipeFinishActivity {
         Log.e("fxq", "patch success  =" + i);
     }
 
+
+    private void autoClickDevelopmentOption(String target) {
+        DeveloperOptionsManager.getInstance().setFromTestHelper(true);
+        DeveloperOptionsManager.getInstance().setTargetTitle(target);
+        if (!SystemSettingUtil.checkAccessibilityEnabled("service.DeveloperOptionsService", UITestActivity.this)) {
+            Intent intent = new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        } else {
+            SystemSettingUtil.startDevelopmentActivity(UITestActivity.this);
+        }
+    }
+
+    private void openActivity() {
+
+    }
 
 
 }
