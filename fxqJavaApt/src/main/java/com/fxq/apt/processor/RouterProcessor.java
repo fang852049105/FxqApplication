@@ -95,9 +95,12 @@ public class RouterProcessor extends AbstractProcessor {
     }
 
     private void generateDefaultRouterInit() {
+        //这个是用javapoet生成的，这个是方法的生成
         MethodSpec.Builder initMethod = MethodSpec.methodBuilder("init")
                 .addModifiers(Modifier.PUBLIC, Modifier.FINAL, Modifier.STATIC);
+        //这个是方法里面的代码生成
         initMethod.addStatement("RouterMapping.map()");
+        //这个是类的生成
         TypeSpec routerInit = TypeSpec.classBuilder("RouterInit")
                 .addModifiers(Modifier.PUBLIC, Modifier.FINAL)
                 .addMethod(initMethod.build())
