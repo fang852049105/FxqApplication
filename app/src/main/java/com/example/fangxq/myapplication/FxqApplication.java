@@ -116,6 +116,11 @@ public class FxqApplication extends Application {
                 }).initialize();
     }
 
+
+    private void initMatrix() {
+
+    }
+
     @Override
     public void onTerminate() {
         super.onTerminate();

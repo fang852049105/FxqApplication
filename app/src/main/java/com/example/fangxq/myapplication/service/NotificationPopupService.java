@@ -12,11 +12,13 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.example.fangxq.myapplication.R;
+import com.example.fangxq.myapplication.ui.LineChartTestActivity;
 import com.example.fangxq.myapplication.utils.ActivityProvider;
 
 /**
@@ -35,7 +37,6 @@ public class NotificationPopupService extends Service {
 
     @Override
     public void onCreate() {
-        android.os.Debug.waitForDebugger();
         super.onCreate();
         mTN = new TN(this);
         this.getApplication().registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
@@ -110,6 +111,10 @@ public class NotificationPopupService extends Service {
         private LayoutInflater inflater;
 
         private String mText;
+
+        private float lastX;
+        private float lastY;
+        private boolean isclick;
 
 
         final Runnable mShow = new Runnable() {
@@ -191,7 +196,83 @@ public class NotificationPopupService extends Service {
             } catch (Exception ex) {
 
             }
-            mHandler.postDelayed(mHide, 3000);
+            //整个view设置点击事件，不影响整个view的Touch事件
+//            popupView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent i = new Intent(mContext, LineChartTestActivity.class);
+//                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                    mContext.startActivity(i);
+//                }
+//            });
+
+            //子View设置点击事件，子View区域的影响整个view的Touch事件
+//            popupView.findViewById(R.id.iv_icon).setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent i = new Intent(mContext, LineChartTestActivity.class);
+//                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                    mContext.startActivity(i);
+//                }
+//            });
+//            popupView.findViewById(R.id.ll_content).setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent i = new Intent(mContext, LineChartTestActivity.class);
+//                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                    mContext.startActivity(i);
+//                }
+//            });
+            popupView.findViewById(R.id.iv_icon).setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+//                    mParams.x = (int) event.getRawX() - popupView.getMeasuredWidth()/2;
+//                    //减25为状态栏的高度
+//                    mParams.y = (int) event.getRawY() - popupView.getMeasuredHeight()/2 - 25;
+//                    //刷新
+//                    windowManager.updateViewLayout(popupView, mParams);
+//                    return false;
+                    int ea = event.getAction();
+                    switch (ea) {
+                        case MotionEvent.ACTION_DOWN:
+                            isclick = false;//当按下的时候设置isclick为false，具体原因看后边的讲解
+                            lastX = event.getRawX();
+                            lastY = event.getRawY();//按钮初始的横纵坐标
+                            break;
+                        case MotionEvent.ACTION_MOVE:
+                            isclick = true;//当按钮被移动的时候设置isclick为true
+                            int dx = (int) (event.getRawX() - lastX);
+                            int dy = (int) (event.getRawY() - lastY);//按钮被移动的距离
+                            mParams.x = mParams.x + dx;
+                            mParams.y = mParams.y + dy;
+                            windowManager.updateViewLayout(popupView,mParams);
+                            lastX = event.getRawX();
+                            lastY = event.getRawY();
+                            break;
+                        default:
+                            isclick=false;
+                            break;
+                    }
+                    return isclick;
+                }
+            });
+
+            popupView.findViewById(R.id.iv_icon).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(mContext, LineChartTestActivity.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    mContext.startActivity(i);
+                }
+            });
+            popupView.findViewById(R.id.ll_content).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(mContext, LineChartTestActivity.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    mContext.startActivity(i);
+                }
+            });
         }
 
 

@@ -34,6 +34,7 @@ import com.example.fangxq.myapplication.adapter.MyRecyclerViewAdapter;
 import com.example.fangxq.myapplication.customview.HorizontalProgressWithText;
 import com.example.fangxq.myapplication.customview.TestPopupViewManager;
 import com.example.fangxq.myapplication.manager.DeveloperOptionsManager;
+import com.example.fangxq.myapplication.manager.SortManager;
 import com.example.fangxq.myapplication.service.NotificationPopupService;
 import com.example.fangxq.myapplication.utils.SystemSettingUtil;
 import com.example.fangxq.myapplication.utils.TestUtils;
@@ -149,7 +150,7 @@ public class UITestActivity extends BaseSwipeFinishActivity {
             //ProtocolPopupView.initProtocolPopupView(UITestActivity.this, UITestActivity.this).show(v);
             //showHangNotification();
             //TestPopupViewManager.getInstance().showPopupWindow(TestPopupViewManager.getInstance().buildTestMessageNotificationItem());
-            //startService(new Intent(UITestActivity.this, NotificationPopupService.class));
+            startService(new Intent(UITestActivity.this, NotificationPopupService.class));
             //getPermission();
             //SortManager.selectSort();
             //SortManager.insertSort();
@@ -160,7 +161,8 @@ public class UITestActivity extends BaseSwipeFinishActivity {
             String tag = (String) v.getTag();
             Log.e("fxq", "idString = " + idString + "----- tag = " + tag);
             Log.e("fxq", "num = " + 101 * 0.01);
-            autoClickDevelopmentOption("调试 GPU 过度绘制");
+            //autoClickDevelopmentOption("调试 GPU 过度绘制");
+            //SortManager.findSubstring();
 
         }
     };
