@@ -94,7 +94,7 @@ public class MainActivity extends BaseSwipeFinishActivity implements AdapterView
                 startActivity(i);
                 break;
             case 8:
-                i = new Intent(this, FragmentTestActivity.class);
+                i = new Intent(this, BookManagerActivity.class);
                 startActivity(i);
                 break;
             default:
