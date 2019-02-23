@@ -5,6 +5,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -19,9 +20,11 @@ import com.example.fangxq.myapplication.Book;
 import com.example.fangxq.myapplication.IBookManager;
 import com.example.fangxq.myapplication.IOnNewBookArrivedListener;
 import com.example.fangxq.myapplication.R;
+import com.example.fangxq.myapplication.aidl.BookArrivedListenerImpl;
 import com.example.fangxq.myapplication.aidl.BookManagerImpl;
 import com.example.fangxq.myapplication.aidl.BookManagerService;
 import com.example.fangxq.myapplication.aidl.IIBookManager;
+import com.example.fangxq.myapplication.aidl.IIOnNewBookArrivedListener;
 
 import java.util.List;
 
@@ -69,6 +72,7 @@ public class BookManagerActivity extends Activity {
             mRemoteBookManager = bookManager;
             try {
                 mRemoteBookManager.asBinder().linkToDeath(mDeathRecipient, 0);
+                bookManager.registerListener(mOnNewBookArrivedListener);
                 List<Book> list = bookManager.getBookList();
                 Log.e("fxq", "query book list, list type:"
                         + list.getClass().getCanonicalName());
@@ -82,7 +86,6 @@ public class BookManagerActivity extends Activity {
                 for (Book book : newList) {
                     Log.e("fxq", "query book newlist:" + book.bookName);
                 }
-                bookManager.registerListener(mOnNewBookArrivedListener);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -103,6 +106,15 @@ public class BookManagerActivity extends Activity {
                     .sendToTarget();
         }
     };
+
+
+//    private IIOnNewBookArrivedListener mOnNewBookArrivedListener = new BookArrivedListenerImpl() {
+//        @Override
+//        public void onNewBookArrived(Book newBook) throws RemoteException {
+//            mHandler.obtainMessage(MESSAGE_NEW_BOOK_ARRIVED, newBook)
+//                    .sendToTarget();
+//        }
+//    };
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

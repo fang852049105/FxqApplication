@@ -9,6 +9,8 @@ import android.support.annotation.Nullable;
 
 
 import com.example.fangxq.myapplication.Book;
+import com.example.fangxq.myapplication.IBookManager;
+import com.example.fangxq.myapplication.IOnNewBookArrivedListener;
 
 import java.util.List;
 
@@ -45,11 +47,25 @@ public abstract class BookManagerImpl extends Binder implements IIBookManager {
         //todo
     }
 
+    @Override
+    public void registerListener(IIOnNewBookArrivedListener listener) throws RemoteException {
+        //todo
+    }
+
+    @Override
+    public void unregisterListener(IIOnNewBookArrivedListener listener) throws RemoteException {
+        //todo
+    }
+
     //返回当前Binder对象
     @Override
     public IBinder asBinder() {
         return this;
     }
+
+    public abstract void registerListener(IOnNewBookArrivedListener listener) throws RemoteException;
+
+    public abstract void unregisterListener(IOnNewBookArrivedListener listener) throws RemoteException;
 
     // 此方法运行在服务端的Binder线程，当客户端发起跨进程请求时，远程请求会通过系统底层封装后交由此方法处理。
     // 服务端通过code确定请求的目标方法，接着从data中取出目标方法所需的参数，执行目标方法。当方法执行完毕后，向reply中写入返回值。
@@ -77,6 +93,22 @@ public abstract class BookManagerImpl extends Binder implements IIBookManager {
                     arg0 = null;
                 }
                 this.addBook(arg0);
+                reply.writeNoException();
+                return true;
+            }
+            case TRANSACTION_registerListener: {
+                data.enforceInterface(DESCRIPTOR);
+                IIOnNewBookArrivedListener arg0;
+                arg0 = BookArrivedListenerImpl.asInterface(data.readStrongBinder());
+                this.registerListener(arg0);
+                reply.writeNoException();
+                return true;
+            }
+            case TRANSACTION_unregisterListener: {
+                data.enforceInterface(DESCRIPTOR);
+                IIOnNewBookArrivedListener arg0;
+                arg0 = BookArrivedListenerImpl.asInterface(data.readStrongBinder());
+                this.unregisterListener(arg0);
                 reply.writeNoException();
                 return true;
             }
@@ -139,6 +171,36 @@ public abstract class BookManagerImpl extends Binder implements IIBookManager {
             } finally {
                 reply.recycle();
                 date.recycle();
+            }
+        }
+
+        @Override
+        public void registerListener(IIOnNewBookArrivedListener listener) throws RemoteException {
+            android.os.Parcel _data = android.os.Parcel.obtain();
+            android.os.Parcel _reply = android.os.Parcel.obtain();
+            try {
+                _data.writeInterfaceToken(DESCRIPTOR);
+                _data.writeStrongBinder((((listener != null)) ? (listener.asBinder()) : (null)));
+                mRemote.transact(TRANSACTION_registerListener, _data, _reply, 0);
+                _reply.readException();
+            } finally {
+                _reply.recycle();
+                _data.recycle();
+            }
+        }
+
+        @Override
+        public void unregisterListener(IIOnNewBookArrivedListener listener) throws RemoteException {
+            android.os.Parcel _data = android.os.Parcel.obtain();
+            android.os.Parcel _reply = android.os.Parcel.obtain();
+            try {
+                _data.writeInterfaceToken(DESCRIPTOR);
+                _data.writeStrongBinder((((listener != null)) ? (listener.asBinder()) : (null)));
+                mRemote.transact(TRANSACTION_unregisterListener, _data, _reply, 0);
+                _reply.readException();
+            } finally {
+                _reply.recycle();
+                _data.recycle();
             }
         }
     }

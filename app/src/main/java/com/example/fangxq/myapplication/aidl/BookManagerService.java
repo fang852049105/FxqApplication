@@ -31,14 +31,15 @@ public class BookManagerService extends Service {
 
     private CopyOnWriteArrayList<Book> mBookList = new CopyOnWriteArrayList<>(); // 支持并发读写
 
-    //
+    //对象不能进行跨进程直接传输，跨进程传输客户端的同一个对象会在服务端生成不同的对象，但这些对象底层的Binder对象是同一个。
+    // 专门用于删除跨进程listener的接口
     private RemoteCallbackList<IOnNewBookArrivedListener> mListenerList = new RemoteCallbackList<IOnNewBookArrivedListener>();
 
 
     private Binder mBinder = new IBookManager.Stub() {
         @Override
         public List<Book> getBookList() throws RemoteException {
-            SystemClock.sleep(5000);
+            SystemClock.sleep(1000);
             return mBookList;
         }
 
@@ -97,6 +98,7 @@ public class BookManagerService extends Service {
 //    private Binder mBinder = new BookManagerImpl() {
 //        @Override
 //        public List<Book> getBookList() throws RemoteException {
+//            SystemClock.sleep(5000);
 //            return mBookList;
 //        }
 //
@@ -104,11 +106,58 @@ public class BookManagerService extends Service {
 //        public void addBook(Book book) throws RemoteException {
 //            mBookList.add(book);
 //        }
+//
+//        @Override
+//        public void registerListener(IOnNewBookArrivedListener listener) throws RemoteException {
+//            mListenerList.register(listener);
+//
+//            final int N = mListenerList.beginBroadcast();
+//            mListenerList.finishBroadcast();
+//            Log.e("fxq", "registerListener, current size:" + N);
+//        }
+//
+//        @Override
+//        public void unregisterListener(IOnNewBookArrivedListener listener) throws RemoteException {
+//            boolean success = mListenerList.unregister(listener);
+//
+//            if (success) {
+//                Log.e("fxq", "unregister success.");
+//            } else {
+//                Log.e("fxq", "not found, can not unregister.");
+//            }
+//            final int N = mListenerList.beginBroadcast();
+//            mListenerList.finishBroadcast();
+//            Log.e("fxq", "unregisterListener, current size:" + N);
+//        }
+//
+//        @Override
+//        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+//                throws RemoteException {
+//            int check = checkCallingOrSelfPermission("com.fangxq.permission.ACCESS_BOOK_SERVICE");
+//            Log.e("fxq", "check=" + check);
+//            if (check == PackageManager.PERMISSION_DENIED) {
+//                return false;
+//            }
+//
+//            String packageName = null;
+//            String[] packages = getPackageManager().getPackagesForUid(
+//                    getCallingUid());
+//            if (packages != null && packages.length > 0) {
+//                packageName = packages[0];
+//            }
+//            Log.e("fxq", "onTransact: " + packageName);
+//            if (!packageName.startsWith("com.example.fangxq")) {
+//                return false;
+//            }
+//
+//            return super.onTransact(code, data, reply, flags);
+//        }
 //    };
 
     @Override
     public void onCreate() {
         super.onCreate();
+        android.os.Debug.waitForDebugger();
         mBookList.add(new Book(1, "Android"));
         mBookList.add(new Book(1, "IOS"));
         new Thread(new ServiceWorker()).start();
