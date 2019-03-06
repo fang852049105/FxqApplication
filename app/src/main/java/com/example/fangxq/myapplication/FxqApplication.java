@@ -11,6 +11,10 @@ import com.fxq.lib.anrwatchdog.ANRWatchManager;
 import com.taobao.sophix.PatchStatus;
 import com.taobao.sophix.SophixManager;
 import com.taobao.sophix.listener.PatchLoadStatusListener;
+import com.tencent.matrix.Matrix;
+import com.tencent.matrix.iocanary.IOCanaryPlugin;
+import com.tencent.matrix.trace.TracePlugin;
+import com.tencent.matrix.trace.config.TraceConfig;
 
 
 /**
@@ -70,6 +74,7 @@ public class FxqApplication extends Application {
 //                .setReportAllThreadInfo(false)
 //                .setSaveExceptionToFile(true)
 //                .start();
+        initMatrix();
     }
 
     public void initData() {
@@ -119,6 +124,19 @@ public class FxqApplication extends Application {
 
     private void initMatrix() {
 
+        Matrix.Builder builder = new Matrix.Builder(this);
+        //trace
+        TraceConfig traceConfig = new TraceConfig.Builder()
+                .enableFPS(true)
+                .enableMethodTrace(true)
+                .enableStartUp(true)
+                .splashActivity("com.example.fangxq.myapplication.ui.SplashActivity")
+                .build();
+
+        TracePlugin tracePlugin = (new TracePlugin(traceConfig));
+        builder.plugin(tracePlugin);
+        Matrix.init(builder.build());
+        tracePlugin.start();
     }
 
     @Override
