@@ -3,6 +3,7 @@ package com.example.fangxq.myapplication.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,6 @@ import com.example.fangxq.myapplication.R;
 import com.fxq.apt.annotation.BindView;
 import com.fxq.apt.annotation.Module;
 import com.fxq.apt.annotation.Router;
-import com.taobao.sophix.SophixManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +54,7 @@ public class MainActivity extends BaseSwipeFinishActivity implements AdapterView
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(this);
-        SophixManager.getInstance().queryAndLoadNewPatch();
+        //SophixManager.getInstance().queryAndLoadNewPatch();
     }
 
     @Override

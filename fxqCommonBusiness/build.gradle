@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.fxq.plugin'  //和plugin的properties文件名称一致
 
 android {
     compileSdkVersion 23

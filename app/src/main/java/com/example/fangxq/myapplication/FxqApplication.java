@@ -4,15 +4,11 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.multidex.MultiDex;
 import android.util.Log;
 
 import com.example.fangxq.myapplication.utils.ActivityProvider;
-import com.fxq.lib.anrwatchdog.ANRWatchManager;
-import com.taobao.sophix.PatchStatus;
-import com.taobao.sophix.SophixManager;
-import com.taobao.sophix.listener.PatchLoadStatusListener;
 import com.tencent.matrix.Matrix;
-import com.tencent.matrix.iocanary.IOCanaryPlugin;
 import com.tencent.matrix.trace.TracePlugin;
 import com.tencent.matrix.trace.config.TraceConfig;
 
@@ -74,7 +70,7 @@ public class FxqApplication extends Application {
 //                .setReportAllThreadInfo(false)
 //                .setSaveExceptionToFile(true)
 //                .start();
-        initMatrix();
+        //initMatrix();
     }
 
     public void initData() {
@@ -89,37 +85,38 @@ public class FxqApplication extends Application {
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
+        MultiDex.install(this);
         Log.e("fxq", "FxqApplication attachBaseContext()");
-        initSophix();
+        //initSophix();
     }
 
-    private void initSophix() {
-        String appVersion;
-        try {
-            appVersion = this.getPackageManager().getPackageInfo(this.getPackageName(), 0).versionName;
-            Log.e("fxq", "appVersion = " + appVersion);
-
-        } catch (Exception e) {
-            appVersion = "1.0.0";
-        }
-
-        SophixManager.getInstance().setContext(this)
-                .setAppVersion(appVersion)
-                .setAesKey(null)
-                .setEnableDebug(true)
-                .setPatchLoadStatusStub(new PatchLoadStatusListener() {
-                    @Override
-                    public void onLoad(final int mode, final int code, final String info, final int handlePatchVersion) {
-                        Log.e("fxq", "PatchLoadStatusListener code = " + code);
-
-                        if (code == PatchStatus.CODE_DOWNLOAD_SUCCESS) {
-
-                        } else if (code == PatchStatus.CODE_LOAD_RELAUNCH) {
-                        }
-
-                    }
-                }).initialize();
-    }
+//    private void initSophix() {
+//        String appVersion;
+//        try {
+//            appVersion = this.getPackageManager().getPackageInfo(this.getPackageName(), 0).versionName;
+//            Log.e("fxq", "appVersion = " + appVersion);
+//
+//        } catch (Exception e) {
+//            appVersion = "1.0.0";
+//        }
+//
+//        SophixManager.getInstance().setContext(this)
+//                .setAppVersion(appVersion)
+//                .setAesKey(null)
+//                .setEnableDebug(true)
+//                .setPatchLoadStatusStub(new PatchLoadStatusListener() {
+//                    @Override
+//                    public void onLoad(final int mode, final int code, final String info, final int handlePatchVersion) {
+//                        Log.e("fxq", "PatchLoadStatusListener code = " + code);
+//
+//                        if (code == PatchStatus.CODE_DOWNLOAD_SUCCESS) {
+//
+//                        } else if (code == PatchStatus.CODE_LOAD_RELAUNCH) {
+//                        }
+//
+//                    }
+//                }).initialize();
+//    }
 
 
     private void initMatrix() {
@@ -143,4 +140,6 @@ public class FxqApplication extends Application {
     public void onTerminate() {
         super.onTerminate();
     }
+
+
 }
