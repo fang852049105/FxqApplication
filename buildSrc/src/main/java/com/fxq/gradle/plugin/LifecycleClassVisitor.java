@@ -1,6 +1,5 @@
 package com.fxq.gradle.plugin;
 
-import com.fxq.gradle.plugin.LifecycleOnCreateMethodVisitor;
 
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;

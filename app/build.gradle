@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: com.fxq.gradle.plugin.SecondPlugin  //方式二 结合module（buildsrc）使用gradle插件
+apply plugin: 'com.fxq.plugin'  //和plugin的properties文件名称一致
+
 
 android {
     compileSdkVersion 23
@@ -22,6 +24,11 @@ android {
     dexOptions {
         preDexLibraries = false
         javaMaxHeapSize "4g"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
     }
 
     signingConfigs {

@@ -8,9 +8,11 @@ import android.support.multidex.MultiDex;
 import android.util.Log;
 
 import com.example.fangxq.myapplication.utils.ActivityProvider;
-import com.tencent.matrix.Matrix;
-import com.tencent.matrix.trace.TracePlugin;
-import com.tencent.matrix.trace.config.TraceConfig;
+import com.fxq.gradle.plugin.Cost;
+import com.fxq.lib.anrwatchdog.ANRWatchManager;
+//import com.tencent.matrix.Matrix;
+//import com.tencent.matrix.trace.TracePlugin;
+//import com.tencent.matrix.trace.config.TraceConfig;
 
 
 /**
@@ -19,6 +21,7 @@ import com.tencent.matrix.trace.config.TraceConfig;
 public class FxqApplication extends Application {
 
     private static FxqApplication mMyApplication;
+    @Cost
     @Override
     public void onCreate() {
         super.onCreate();
@@ -65,11 +68,11 @@ public class FxqApplication extends Application {
 //                Log.e("fxq onAppNotResponding", error.getMessage());
 //            }
 //        }).start();
-//        ANRWatchManager.getInstance(this)
-//                .setTimeoutInterval(3000)
-//                .setReportAllThreadInfo(false)
-//                .setSaveExceptionToFile(true)
-//                .start();
+        ANRWatchManager.getInstance(this)
+                .setTimeoutInterval(3000)
+                .setReportAllThreadInfo(false)
+                .setSaveExceptionToFile(true)
+                .start();
         //initMatrix();
     }
 
@@ -119,22 +122,22 @@ public class FxqApplication extends Application {
 //    }
 
 
-    private void initMatrix() {
-
-        Matrix.Builder builder = new Matrix.Builder(this);
-        //trace
-        TraceConfig traceConfig = new TraceConfig.Builder()
-                .enableFPS(true)
-                .enableMethodTrace(true)
-                .enableStartUp(true)
-                .splashActivity("com.example.fangxq.myapplication.ui.SplashActivity")
-                .build();
-
-        TracePlugin tracePlugin = (new TracePlugin(traceConfig));
-        builder.plugin(tracePlugin);
-        Matrix.init(builder.build());
-        tracePlugin.start();
-    }
+//    private void initMatrix() {
+//
+//        Matrix.Builder builder = new Matrix.Builder(this);
+//        //trace
+//        TraceConfig traceConfig = new TraceConfig.Builder()
+//                .enableFPS(true)
+//                .enableMethodTrace(true)
+//                .enableStartUp(true)
+//                .splashActivity("com.example.fangxq.myapplication.ui.SplashActivity")
+//                .build();
+//
+//        TracePlugin tracePlugin = (new TracePlugin(traceConfig));
+//        builder.plugin(tracePlugin);
+//        Matrix.init(builder.build());
+//        tracePlugin.start();
+//    }
 
     @Override
     public void onTerminate() {

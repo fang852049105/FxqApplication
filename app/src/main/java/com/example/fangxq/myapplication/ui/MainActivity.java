@@ -3,7 +3,6 @@ package com.example.fangxq.myapplication.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +11,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-
 import com.example.fangxq.myapplication.R;
 import com.fxq.apt.annotation.BindView;
 import com.fxq.apt.annotation.Module;
 import com.fxq.apt.annotation.Router;
+import com.fxq.gradle.plugin.Cost;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +29,7 @@ public class MainActivity extends BaseSwipeFinishActivity implements AdapterView
 
     @BindView(R.id.listView)
     ListView listView;
+    @Cost
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +54,7 @@ public class MainActivity extends BaseSwipeFinishActivity implements AdapterView
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(this);
+
         //SophixManager.getInstance().queryAndLoadNewPatch();
     }
 

@@ -76,7 +76,8 @@ public class TestTransform extends Transform {
                             System.out.println('----------- deal with "class" file <' + name + '> -----------')
                             ClassReader classReader = new ClassReader(file.bytes)
                             ClassWriter classWriter = new ClassWriter(classReader, ClassWriter.COMPUTE_MAXS)
-                            ClassVisitor cv = new LifecycleClassVisitor(classWriter)
+                            //ClassVisitor cv = new LifecycleClassVisitor(classWriter)
+                            ClassVisitor cv = new MethodCostClassVisitor(classWriter)
                             classReader.accept(cv, EXPAND_FRAMES)
                             byte[] code = classWriter.toByteArray()
                             FileOutputStream fos = new FileOutputStream(
