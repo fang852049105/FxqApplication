@@ -3,6 +3,7 @@ package com.example.fangxq.myapplication.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.fangxq.myapplication.R;
+import com.example.fangxq.myapplication.customview.TestPopupViewManager;
 import com.fxq.apt.annotation.BindView;
 import com.fxq.apt.annotation.Module;
 import com.fxq.apt.annotation.Router;
@@ -153,6 +155,19 @@ public class MainActivity extends BaseSwipeFinishActivity implements AdapterView
     }
 
     private void showPopupView() {
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.e("fxq", "onPause() isFinishing() =  " + this.isFinishing());
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.e("fxq", "onDestroy() isFinishing() =  " + this.isFinishing());
 
     }
 

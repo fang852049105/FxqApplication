@@ -19,6 +19,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewStub;
 import android.webkit.WebView;
@@ -266,8 +268,11 @@ public class UITestActivity extends BaseSwipeFinishActivity {
     }
 
     private void openActivity() {
-
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
 
 }
