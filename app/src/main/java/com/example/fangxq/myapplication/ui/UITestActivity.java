@@ -51,6 +51,7 @@ import java.util.List;
 import java.util.UUID;
 
 import fxq.android.com.commonbusiness.ui.BaseSwipeFinishActivity;
+import io.flutter.facade.Flutter;
 
 /**
  * Created by Fangxq on 2017/7/21.

@@ -94,6 +94,10 @@
             android:name=".ui.BookManagerActivity"
             android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name=".ui.FlutterActivity"
+            android:screenOrientation="portrait">
+        </activity>
 
         <meta-data
             android:name="com.taobao.android.hotfix.IDSECRET"

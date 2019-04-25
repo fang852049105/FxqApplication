@@ -93,7 +93,7 @@ public class MainActivity extends BaseSwipeFinishActivity implements AdapterView
                 startActivity(i);
                 break;
             case 7:
-                i = new Intent(this, UITestActivity.class);
+                i = new Intent(this, FlutterActivity.class);
                 startActivity(i);
                 break;
             case 8:
