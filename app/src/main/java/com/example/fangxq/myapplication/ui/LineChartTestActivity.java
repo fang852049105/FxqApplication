@@ -1,5 +1,6 @@
 package com.example.fangxq.myapplication.ui;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -131,15 +132,15 @@ public class LineChartTestActivity extends Activity implements OnChartValueSelec
         }
     }
 
-    private void setRaidBtnAttribute( final RadioButton codeBtn, String btnContent, int id ){
+    @SuppressLint("ResourceType")
+    private void setRaidBtnAttribute(final RadioButton codeBtn, String btnContent, int id ){
         if( null == codeBtn ){
             return;
         }
         codeBtn.setBackgroundResource(R.drawable.trend_button_selector);
         codeBtn.setButtonDrawable(new ColorDrawable(Color.TRANSPARENT));
         codeBtn.setTextSize(12f);
-        //codeBtn.setId( id );
-        codeBtn.setText( btnContent );
+        codeBtn.setText(btnContent);
         codeBtn.setTextColor(ContextCompat.getColorStateList(LineChartTestActivity.this, R.drawable.color_radiobutton));
 
         codeBtn.setGravity( Gravity.CENTER );

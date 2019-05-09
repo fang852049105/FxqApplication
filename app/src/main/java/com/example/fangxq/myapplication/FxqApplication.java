@@ -10,6 +10,7 @@ import android.util.Log;
 import com.example.fangxq.myapplication.utils.ActivityProvider;
 import com.fxq.gradle.plugin.Cost;
 import com.fxq.lib.anrwatchdog.ANRWatchManager;
+import com.meituan.android.walle.WalleChannelReader;
 //import com.tencent.matrix.Matrix;
 //import com.tencent.matrix.trace.TracePlugin;
 //import com.tencent.matrix.trace.config.TraceConfig;
@@ -74,6 +75,7 @@ public class FxqApplication extends Application {
                 .setSaveExceptionToFile(true)
                 .start();
         //initMatrix();
+        getChannelName();
     }
 
     public void initData() {
@@ -138,6 +140,11 @@ public class FxqApplication extends Application {
 //        Matrix.init(builder.build());
 //        tracePlugin.start();
 //    }
+
+    private void getChannelName() {
+        String channel = WalleChannelReader.getChannel(this.getApplicationContext());
+        Log.e("fxq", "channel = "  + channel);
+    }
 
     @Override
     public void onTerminate() {
