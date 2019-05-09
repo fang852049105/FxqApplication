@@ -158,7 +158,7 @@ public class UITestActivity extends BaseSwipeFinishActivity {
             //SortManager.selectSort();
             //SortManager.insertSort();
             //testPatch();
-            //test();
+            test();
             TestUtils.ChainTest();
             String idString = v.getContext().getResources().getResourceEntryName(v.getId());
             String tag = (String) v.getTag();
@@ -228,14 +228,16 @@ public class UITestActivity extends BaseSwipeFinishActivity {
     }
 
     private void test() {
-        String testStr = "ANR in zmsoft.rest.performancetest (zmsoft.rest.performancetest/.AnrUiActivity) (test.java:***)PI:***";
-
-        String fomatStr = testStr.replaceAll("\\d", "");
-//        if (testStr.contains("PID")) {
-//            fomatStr = testStr.substring(0, testStr.indexOf("PID"));
+        String cpu = Build.CPU_ABI;
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            cpu = Arrays.deepToString(Build.SUPPORTED_ABIS);
+//        } else {
+//            cpu = Build.CPU_ABI;
 //        }
-        Log.e("fxq", "fomatStr = " + fomatStr);
-        TestUtils.startDevelopmentActivity(this);
+        String cpu2 = Build.CPU_ABI2;
+
+        Log.e("fxq", "cpu = " + cpu + "   cpu2 = " + cpu2);
+
     }
 
     @Override

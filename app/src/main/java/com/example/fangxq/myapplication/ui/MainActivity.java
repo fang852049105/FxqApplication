@@ -13,7 +13,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.fangxq.myapplication.R;
-import com.example.fangxq.myapplication.customview.TestPopupViewManager;
 import com.fxq.apt.annotation.BindView;
 import com.fxq.apt.annotation.Module;
 import com.fxq.apt.annotation.Router;
@@ -51,6 +50,7 @@ public class MainActivity extends BaseSwipeFinishActivity implements AdapterView
         objects.add(new ContentItem("EditTestActivity", ""));
         objects.add(new ContentItem("UITestActivity", ""));
         objects.add(new ContentItem("FragmentTestActivity", ""));
+        objects.add(new ContentItem("FlutterTestActivity", ""));
         MyAdapter adapter = new MyAdapter(this, objects);
 
         listView.setAdapter(adapter);
@@ -93,11 +93,15 @@ public class MainActivity extends BaseSwipeFinishActivity implements AdapterView
                 startActivity(i);
                 break;
             case 7:
-                i = new Intent(this, FlutterActivity.class);
+                i = new Intent(this, UITestActivity.class);
                 startActivity(i);
                 break;
             case 8:
                 i = new Intent(this, BookManagerActivity.class);
+                startActivity(i);
+                break;
+            case 9:
+                i = new Intent(this, FlutterDemoActivity.class);
                 startActivity(i);
                 break;
             default:

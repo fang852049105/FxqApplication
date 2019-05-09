@@ -95,7 +95,7 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".ui.FlutterActivity"
+            android:name=".ui.FlutterDemoActivity"
             android:screenOrientation="portrait">
         </activity>
 

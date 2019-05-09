@@ -29,7 +29,6 @@
                 app:shown_edit_text_size="14sp" />
 
             <com.example.fangxq.myapplication.customview.ClearShownEditText
-                android:id="@+id/test_edit_two"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="63dp"
