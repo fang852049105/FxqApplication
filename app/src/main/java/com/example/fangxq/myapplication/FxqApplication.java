@@ -70,9 +70,9 @@ public class FxqApplication extends Application {
 //            }
 //        }).start();
         ANRWatchManager.getInstance(this)
-                .setTimeoutInterval(3000)
+                .setTimeoutInterval(5000)
                 .setReportAllThreadInfo(false)
-                .setSaveExceptionToFile(true)
+                .setSaveExceptionToFile(false)
                 .start();
         //initMatrix();
         getChannelName();

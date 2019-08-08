@@ -1,15 +1,22 @@
 package com.fxq.lib.anrwatchdog;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.IntentFilter;
+import android.os.Build;
 import android.os.Debug;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
+import android.system.Os;
 import android.text.TextUtils;
+import android.util.Log;
+import android.view.Choreographer;
 
 import com.fxq.lib.utils.FileUtils;
 import com.fxq.lib.utils.PackageUtils;
 
 import java.io.File;
+import java.util.List;
 
 import gradleplugin.fxq.com.fxqlib.BuildConfig;
 
@@ -19,6 +26,7 @@ import gradleplugin.fxq.com.fxqlib.BuildConfig;
  */
 public class ANRWatchManager {
 
+    private static final String TAG = "ANRWatchManager";
     /**
      * ANR 监听回调
      */
@@ -71,6 +79,11 @@ public class ANRWatchManager {
     private static final long SLEEP_TIME = 60 * 1000;
     private ANRBroadcastReceiver mANRBroadcastReceiver;
     public static final String ACTION_ANR = "android.intent.action.ANR";
+
+    /**
+     * 默认采样方式
+     */
+    private MonitorMode DEFAULT_MODE = MonitorMode.FRAME;
 
     private ANRWatchManager(Context context) {
         if (context != null) {
@@ -135,6 +148,14 @@ public class ANRWatchManager {
         return this;
     }
 
+    public ANRWatchManager setDefaultMode(MonitorMode defaultMode) {
+        this.DEFAULT_MODE = defaultMode;
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+            this.DEFAULT_MODE = MonitorMode.LOOPER;
+        }
+        return this;
+    }
+
     /**
      * 启动监控
      */
@@ -143,18 +164,21 @@ public class ANRWatchManager {
             return;
         }
         appStartPostANRExceptionFile();
-        //ANRWatchRunnable start
-        if (mANRWatchRunnable == null) {
-            mANRWatchRunnable = new ANRWatchRunnable(mContext);
-        }
-        mANRWatchRunnable.setInterruptionListener(mInterruptionListener)
-                .setIgnoreDebugger(ignoreDebugger)
-                .setTimeoutInterval(timeoutInterval)
-                .setReportAllThreadInfo(reportAllThreadInfo)
-                .start();
-        //ANRCatch use BroadcastReceiver
-        if (startBRMonitor) {
-            registerANRReceiver(mContext);
+        if (DEFAULT_MODE == MonitorMode.LOOPER) {
+            //ANRWatchRunnable start
+            if (mANRWatchRunnable == null) {
+                mANRWatchRunnable = new ANRWatchRunnable(mContext);
+            }
+            mANRWatchRunnable.setInterruptionListener(mInterruptionListener).setIgnoreDebugger(ignoreDebugger).setTimeoutInterval(timeoutInterval).setReportAllThreadInfo(reportAllThreadInfo).start();
+            //ANRCatch use BroadcastReceiver
+            if (startBRMonitor) {
+                registerANRReceiver(mContext);
+            }
+        } else if (DEFAULT_MODE == MonitorMode.FRAME) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                FPSFrameCallBack fpsFrameCallBack = new FPSFrameCallBack(mContext, timeoutInterval);
+                Choreographer.getInstance().postFrameCallback(fpsFrameCallBack);
+            }
         }
     }
 
@@ -225,6 +249,7 @@ public class ANRWatchManager {
         if (saveExceptionToFile) {
             FileUtils.saveStringToFile(mContext, exceptionStringBuilder.toString(), FileUtils.getFilePath(filePath), fileName);
         } else {
+            Log.e("FPSFrameCallBack", "exceptionStringBuilder = " + exceptionStringBuilder.toString());
             postANRException(exceptionStringBuilder.toString(), "");
         }
     }
@@ -302,12 +327,32 @@ public class ANRWatchManager {
      * 处理ANR信息
      */
     public void filterANR() {
-        if (Debug.isDebuggerConnected() || (ignoreDebugger && BuildConfig.DEBUG)) {
-            return;
-        }
+//        if (Debug.isDebuggerConnected() || (ignoreDebugger && BuildConfig.DEBUG)) {
+//            return;
+//        }
         handleANRExceptionStr(ANRCatchHelper.getFilteredANR(mContext));
     }
     //BroadcastReceiver catch ANR end
+
+
+
+    /**
+     * 监控ANR的模式
+     */
+    public enum MonitorMode {
+        //通过监测主线程消息处理时间来判断。
+        LOOPER(0),
+        //通过监测绘制帧间隔时间来判断是否卡顿，API 16上才能使用。
+        FRAME(1);
+
+
+        int value;
+
+        MonitorMode(int mode) {
+            this.value = mode;
+        }
+    }
+
 
     public interface ANRListener {
         /**

@@ -51,7 +51,6 @@ import java.util.List;
 import java.util.UUID;
 
 import fxq.android.com.commonbusiness.ui.BaseSwipeFinishActivity;
-import io.flutter.facade.Flutter;
 
 /**
  * Created by Fangxq on 2017/7/21.
@@ -145,7 +144,11 @@ public class UITestActivity extends BaseSwipeFinishActivity {
     private View.OnClickListener addOnClicked = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             stubView.setVisibility(View.VISIBLE);
 //            String url = "dmlife://test?p_t=p_t";
 //            String realUrl = appendCommonParams(url);
