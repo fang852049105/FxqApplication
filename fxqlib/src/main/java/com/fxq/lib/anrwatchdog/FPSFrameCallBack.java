@@ -8,6 +8,8 @@ import android.view.Choreographer;
 import android.view.Display;
 import android.view.WindowManager;
 
+import java.util.Arrays;
+
 /**
  *
  * @author huiguo
@@ -70,11 +72,13 @@ public class FPSFrameCallBack implements Choreographer.FrameCallback {
             final long skippedFrames = jitterNanos / mFrameIntervalNanos;
             if (skippedFrames >= SKIPPED_FRAME_ANR_LIMIT) {
                 Log.e(TAG, "jitterNanos = "+ jitterNanos + "======" + "skippedFrames = "  + skippedFrames + " ====ANR=====");
-                ANRWatchManager.getInstance(mContext).filterANR();
+                ANRWatchManager.getInstance(mContext).filterFPSFrameANR();
+
             }
         }
         mLastFrameTimeNanos = frameTimeNanos;
         Choreographer.getInstance().postFrameCallback(this);
 
     }
+
 }

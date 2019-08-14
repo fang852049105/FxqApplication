@@ -3,6 +3,7 @@ package com.fxq.lib.anrwatchdog;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.IntentFilter;
+import android.nfc.Tag;
 import android.os.Build;
 import android.os.Debug;
 import android.support.annotation.NonNull;
@@ -84,6 +85,8 @@ public class ANRWatchManager {
      * 默认采样方式
      */
     private MonitorMode DEFAULT_MODE = MonitorMode.FRAME;
+
+    private Collector mCollector;
 
     private ANRWatchManager(Context context) {
         if (context != null) {
@@ -176,6 +179,7 @@ public class ANRWatchManager {
             }
         } else if (DEFAULT_MODE == MonitorMode.FRAME) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                 this.mCollector = new StackTraceCollector(1000);
                 FPSFrameCallBack fpsFrameCallBack = new FPSFrameCallBack(mContext, timeoutInterval);
                 Choreographer.getInstance().postFrameCallback(fpsFrameCallBack);
             }
@@ -335,6 +339,18 @@ public class ANRWatchManager {
     //BroadcastReceiver catch ANR end
 
 
+    /**
+     * 处理FPSFrameCallBack 监听的ANR信息
+     */
+    public void filterFPSFrameANR() {
+        String[] stackTraces = mCollector.getStackTraceInfo();
+        StringBuilder exceptionStringBuilder = new StringBuilder();
+        for (String item : stackTraces) {
+            exceptionStringBuilder.append(item);
+        }
+        Log.e(TAG, "exceptionStringBuilder = " + exceptionStringBuilder);
+        handleANRExceptionStr(exceptionStringBuilder.toString());
+    }
 
     /**
      * 监控ANR的模式
