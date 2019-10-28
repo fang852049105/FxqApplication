@@ -1,8 +1,10 @@
 package com.example.fangxq.myapplication.ui;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearSmoothScroller;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
@@ -30,6 +32,7 @@ public class CoordinatorTestActivity extends BaseSwipeFinishActivity {
     private TranslateAnimation mShowAction;
     private RelativeLayout userInfoRelative;
     private Toolbar toolbar;
+    private StaggeredGridLayoutManager mStaggeredGridLayoutManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,8 +65,9 @@ public class CoordinatorTestActivity extends BaseSwipeFinishActivity {
         ((ImageView) findViewById(R.id.avatar0)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
-                Log.e("fxq", "onClick");
+                //mRecyclerView.scrollToPosition(20);
+                mStaggeredGridLayoutManager.scrollToPositionWithOffset(20, 0);
+                Log.e("fxq", "scrollToPosition");
             }
         });
         ((ImageView) findViewById(R.id.remainder)).setOnClickListener(new View.OnClickListener() {
@@ -77,7 +81,8 @@ public class CoordinatorTestActivity extends BaseSwipeFinishActivity {
     }
     private void initDate(){
         mRecyclerView = (RecyclerView) this.findViewById(R.id.recyclerView);
-        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(mStaggeredGridLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         List<Integer> datas = new ArrayList<>();
         for (int i = 0; i < 100; i++) {
@@ -85,5 +90,7 @@ public class CoordinatorTestActivity extends BaseSwipeFinishActivity {
         }
         mRecyclerView.setAdapter(new MyRecyclerViewAdapter(this, datas));
     }
+
+
 
 }

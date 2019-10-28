@@ -11,12 +11,18 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.fangxq.myapplication.R;
 import com.fxq.apt.annotation.BindView;
 import com.fxq.apt.annotation.Module;
 import com.fxq.apt.annotation.Router;
 import com.fxq.gradle.plugin.Cost;
+import com.fxq.lib.omnipotentfunction.FunctionHasParamHasResult;
+import com.fxq.lib.omnipotentfunction.FunctionHasParamNoResult;
+import com.fxq.lib.omnipotentfunction.FunctionNoParamHasResult;
+import com.fxq.lib.omnipotentfunction.FunctionNoParamNoResult;
+import com.fxq.lib.omnipotentfunction.OmnipotentFunctionManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +33,11 @@ import fxq.android.com.commonbusiness.utils.BindViewUtils;
 @Module("mainModule")
 @Router("main")
 public class MainActivity extends BaseSwipeFinishActivity implements AdapterView.OnItemClickListener {
+
+    public static final String FUNCTION_1 = "functon01";
+    public static final String FUNCTION_2 = "functon02";
+    public static final String FUNCTION_3 = "functon03";
+    public static final String FUNCTION_4 = "functon04";
 
     @BindView(R.id.listView)
     ListView listView;
@@ -56,7 +67,7 @@ public class MainActivity extends BaseSwipeFinishActivity implements AdapterView
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(this);
-
+        initOmnipotentFunction();
         //SophixManager.getInstance().queryAndLoadNewPatch();
     }
 
@@ -107,6 +118,41 @@ public class MainActivity extends BaseSwipeFinishActivity implements AdapterView
             default:
                 break;
         }
+    }
+
+    private void initOmnipotentFunction() {
+        //无参 无返回
+        OmnipotentFunctionManager.getInstance().addFunction(new FunctionNoParamNoResult(FUNCTION_1) {
+            @Override
+            public void function() {
+                Log.e("fxq", FUNCTION_1);
+            }
+        });
+
+        //无参 有返回值
+        OmnipotentFunctionManager.getInstance().addFunction(new FunctionNoParamHasResult(FUNCTION_2) {
+            @Override
+            public String function() {
+                Log.e("fxq", FUNCTION_2);
+                return "Hello from the MainActivity";
+            }
+        });
+
+        OmnipotentFunctionManager.getInstance().addFunction(new FunctionHasParamNoResult<String>(FUNCTION_3) {
+            @Override
+            public void function(String s) {
+                Log.e("fxq", FUNCTION_3);
+                Toast.makeText(MainActivity.this, s, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        OmnipotentFunctionManager.getInstance().addFunction(new FunctionHasParamHasResult<String, String>(FUNCTION_4) {
+            @Override
+            public String function(String s) {
+                Log.e("fxq", FUNCTION_4);
+                return s + "from Mainactivity";
+            }
+        });
     }
 
     private class ContentItem {
@@ -172,6 +218,10 @@ public class MainActivity extends BaseSwipeFinishActivity implements AdapterView
     protected void onDestroy() {
         super.onDestroy();
         Log.e("fxq", "onDestroy() isFinishing() =  " + this.isFinishing());
+        OmnipotentFunctionManager.getInstance().removeFunctionNoParamNoResult(FUNCTION_1);
+        OmnipotentFunctionManager.getInstance().removeFunctionNoParamHasResult(FUNCTION_2);
+        OmnipotentFunctionManager.getInstance().removeFunctionHasParamNoResult(FUNCTION_3);
+        OmnipotentFunctionManager.getInstance().removeFunctionHasParamHasResult(FUNCTION_4);
 
     }
 

@@ -1,4 +1,4 @@
-include ':app', ':fxqCommonBusiness', ':fxqlib', ':fxqJavaApt', ':fxqRouter', ':fxqDesignMethod', ':buildsrc'
+include ':app', ':fxqCommonBusiness', ':fxqlib', ':fxqJavaApt', ':fxqRouter', ':fxqDesignMethod', ':buildsrc', ':findactivity'
 setBinding(new Binding([gradle: this]))
 evaluate(new File(
   settingsDir.parentFile,

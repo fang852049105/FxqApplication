@@ -17,6 +17,7 @@ import java.util.List;
 /**
  * @author huiguo
  * @date 2019/1/23
+ * 手动实现binder
  */
 public abstract class BookManagerImpl extends Binder implements IIBookManager {
 
@@ -25,6 +26,11 @@ public abstract class BookManagerImpl extends Binder implements IIBookManager {
         this.attachInterface(this, DESCRIPTOR);
     }
 
+    /**
+     * 将服务端的Binder对象装换成客户端所有的AIDL接口类型的对象
+     * @param obj
+     * @return
+     */
     public static IIBookManager asInterface(IBinder obj) {
         if ((obj == null)) {
             return null;
